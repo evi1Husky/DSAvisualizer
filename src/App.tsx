@@ -1,10 +1,10 @@
-
-import './App.css'
-import {LinkedList} from './LinkedList'
+import { LinkedList } from './LinkedList/LinkedList'
 
 function App() {
   return (
-    <LinkedList />
+    <main className='app-container'>
+      <LinkedList />
+    </main>
   )
 }
 
