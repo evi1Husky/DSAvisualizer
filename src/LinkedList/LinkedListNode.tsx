@@ -8,7 +8,6 @@ interface LinkedListNodeProps {
 interface NodeToRender {
   item: any
   next: any
-  index: number
   new: boolean
 }
 
@@ -29,7 +28,7 @@ export const LinkedListNode: React.FC<LinkedListNodeProps> = ({ node, setNodeVal
       </div>
       <div className={`${css['valueContainerNext']}`}>
         <p className={css['label']}>next:</p>
-        <p className={css['value']}>{node.next}</p>
+        <p className={css['value']}>{node.next === 'undefined' ? 'null' : node.next}</p>
       </div>
     </div>
   )

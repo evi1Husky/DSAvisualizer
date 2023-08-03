@@ -1,5 +1,6 @@
 import css from './styles/linkedList.module.css'
 import { LinkedListNode } from './LinkedListNode.tsx'
+import { randomKey } from '../utility.ts'
 
 interface LinkedListProps {
   linkedList: Node | null
@@ -14,38 +15,32 @@ interface Node {
 }
 
 interface NodeToRender {
-  item: unknown
-  next: unknown
-  index: number
+  item: string
+  next: string
   new: boolean
 }
 
-type NodeArray = NodeToRender[]
-
-const makeNodeArray = (node: Node, n: number, arr: NodeArray, i = 1): NodeArray => {
+const makeNodeArray = (node: Node, n: number, arr: NodeToRender[]): NodeToRender[] => {
   if (n === 0) {
     return arr
   } else {
-    arr.push({
-      item: node.item,
-      next: node.next?.item,
-      index: i,
+    let nodeToRender: NodeToRender = {
+      item: String(node.item),
+      next: String(node.next?.item),
       new: node.new
-    })
-    return makeNodeArray(node.next!, n -= 1, arr, i += 1)
+    }
+    arr.push(nodeToRender)
+    return makeNodeArray(node.next!, n -= 1, arr)
   }
 }
 
 export const LinkedListRenderer: React.FC<LinkedListProps>
   = ({ linkedList, length, setNodeValue }) => {
-    let nodes: NodeArray = []
-
-    nodes = makeNodeArray(linkedList!, length, nodes)
-
+    let nodes = makeNodeArray(linkedList!, length, [])
     return (
       <div className={css['array']}>
         {nodes.map((node): React.ReactNode => {
-          return <LinkedListNode key={node.index} node={node} setNodeValue={setNodeValue} />
+          return <LinkedListNode key={randomKey(5)} node={node} setNodeValue={setNodeValue} />
         })}
       </div>
     )

@@ -1,10 +1,13 @@
 import css from './styles/functionButtons.module.css'
+import { useEffect, useState } from 'react'
+import { randomNumber } from '../utility.ts'
 
 interface LinkedListControlsProps {
   nodeValue: number
   setNodeValue: (num: number) => void
   removeFirst: () => void
   removeLast: () => void
+  removeItem: (key: unknown) => void
   append: (nodeValue: number) => void
   prepend: (nodeValue: number) => void
   insertAfter: (key: number, nodeValue: number) => void
@@ -19,9 +22,10 @@ export const LinkedListControls: React.FC<LinkedListControlsProps> = ({
   insertBefore,
   prepend,
   removeFirst,
-  removeLast }) => {
+  removeLast,
+  removeItem }) => {
 
-  const randomItem = Math.floor(Math.random() * 11)
+  const randomItem = randomNumber(9)
 
   const appendButton = () => {
     setNodeValue(randomItem)
@@ -43,9 +47,29 @@ export const LinkedListControls: React.FC<LinkedListControlsProps> = ({
     insertBefore(nodeValue, randomItem)
   }
 
+  const [appendBtn, getAppendBtn] = useState<HTMLElement | null | undefined>(null)
+
+  const buildListOnPageLoad = (delay: number, nodeCount: number, button: HTMLElement) => {
+    for (let i = 0; i < nodeCount; i++) {
+      setTimeout(() => {
+        button.click()
+      }, delay)
+      delay = delay * 1.7
+    }
+  }
+
+  useEffect(() => {
+    getAppendBtn(document.getElementById('append'))
+    if (appendBtn) {
+      setTimeout(() => {
+        buildListOnPageLoad(23, 5, appendBtn)
+      }, 0)
+    }
+  }, [appendBtn])
+
   return (
     <div className={css['buttonContainer']}>
-      <button className={css['button']} onClick={appendButton}>
+      <button className={css['button']} id={'append'} onClick={appendButton}>
         append({nodeValue})</button>
       <button className={css['button']} onClick={prependButton}>
         prepend({nodeValue})</button>
@@ -57,6 +81,8 @@ export const LinkedListControls: React.FC<LinkedListControlsProps> = ({
         removeFirst( )</button>
       <button className={css['button']} onClick={removeLast}>
         removeLast( )</button>
+      <button className={css['button']} onClick={() => { removeItem(nodeValue) }}>
+        removeItem({nodeValue})</button>
     </div>
   )
 }

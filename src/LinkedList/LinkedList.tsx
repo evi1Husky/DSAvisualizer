@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { LinkedListRenderer } from './LinkedListRenderer'
 import { LinkedListControls } from './LinkedListControls'
+import { randomNumber } from '../utility.ts'
 
 interface Node {
   item: unknown
@@ -17,7 +18,7 @@ const makeNode = (item: unknown, next: Node | null): Node => ({
 export const LinkedList = () => {
   const [head, setNode] = useState<Node | null>(null)
   const [length, setLength] = useState(0)
-  const [nodeValue, setNodeValue] = useState<number>(Math.floor(Math.random() * 11))
+  const [nodeValue, newNodeValue] = useState<number>(randomNumber(9))
 
   const resetLabels = () => {
     if (head) {
@@ -28,6 +29,11 @@ export const LinkedList = () => {
         node.new = false
       }
     }
+  }
+
+  const setNodeValue = (val: number) => {
+    resetLabels()
+    newNodeValue(val)
   }
 
   const addFirstNode = (item: unknown) => {
@@ -50,7 +56,7 @@ export const LinkedList = () => {
         node = node.next
       }
       node.next = makeNode(item, null)
-      addNode(head)
+      setLength(length + 1)
     }
   }
 
@@ -71,7 +77,7 @@ export const LinkedList = () => {
     while ((node != null) && (node.item != key)) { node = node.next }
     if (node != null) {
       node.next = makeNode(item, node.next)
-      addNode(head!)
+      setLength(length + 1)
     }
   }
 
@@ -90,7 +96,7 @@ export const LinkedList = () => {
     }
     if (node != null) {
       previous!.next = makeNode(item, node)
-      addNode(head)
+      setLength(length + 1)
     }
   }
 
@@ -113,7 +119,6 @@ export const LinkedList = () => {
       while (node.next != null) {
         if (!node.next.next) {
           node.next = null
-          addNode(head)
           setLength(length - 1)
           return
         }
@@ -122,12 +127,25 @@ export const LinkedList = () => {
     }
   }
 
-  const removeItem = () => {
-    
+  const removeItem = (key: unknown) => {
+    if (!head) {
+      return
+    }
+    let targetNode = head
+    let nextNode = targetNode.next
+    while (nextNode !== null && nextNode.item !== key) {
+      targetNode = nextNode
+      nextNode = nextNode.next
+    }
+    if (nextNode === null) {
+      removeFirst()
+    } else {
+      targetNode.next = nextNode.next
+      resetLabels()
+      setLength(length - 1)
+    }
   }
 
-  // console.clear()
-  // console.log(head)
   return (
     <>
       <LinkedListControls
@@ -138,7 +156,8 @@ export const LinkedList = () => {
         removeFirst={removeFirst}
         removeLast={removeLast}
         setNodeValue={setNodeValue}
-        prepend={prepend} />
+        prepend={prepend}
+        removeItem={removeItem} />
       <LinkedListRenderer
         linkedList={head}
         length={length}
