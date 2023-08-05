@@ -1,0 +1,21 @@
+.backButton {
+  cursor: default;
+  font-size: 3rem;
+  color: var(--backButton);
+  text-decoration: none;
+}
+
+.backButton:hover {
+  filter: brightness(1.12);
+}
+
+.backButton:active {
+  filter: brightness(0.8);
+  transform: scale(0.99);
+}
+
+@media only screen and (max-width: 500px) {
+  .backButton {
+    transform: scale(0.7);
+  }
+}

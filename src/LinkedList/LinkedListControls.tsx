@@ -1,22 +1,26 @@
-import css from './styles/functionButtons.module.css'
-import { useEffect, useState } from 'react'
+import buttonCSS from '../css/buttons.module.css'
+import AnimatedList from '../listAnimation/AnimatedList.tsx'
+import { useEffect, useState, useRef } from 'react'
 import { randomNumber } from '../utility.ts'
+import { Link } from 'react-router-dom'
+
+AnimatedList.setListContainerID('listContainer')
 
 interface LinkedListControlsProps {
-  nodeValue: number
-  setNodeValue: (num: number) => void
+  length: number
+  selectedNode: React.MutableRefObject<string>
   removeFirst: () => void
   removeLast: () => void
   removeItem: (key: unknown) => void
-  append: (nodeValue: number) => void
-  prepend: (nodeValue: number) => void
-  insertAfter: (key: number, nodeValue: number) => void
-  insertBefore: (key: number, nodeValue: number) => void
+  append: (selectedNode: number) => void
+  prepend: (selectedNode: number) => void
+  insertAfter: (key: string, selectedNode: number) => void
+  insertBefore: (key: string, selectedNode: number) => void
 }
 
 export const LinkedListControls: React.FC<LinkedListControlsProps> = ({
-  nodeValue,
-  setNodeValue,
+  length,
+  selectedNode,
   append,
   insertAfter,
   insertBefore,
@@ -25,64 +29,92 @@ export const LinkedListControls: React.FC<LinkedListControlsProps> = ({
   removeLast,
   removeItem }) => {
 
-  const randomItem = randomNumber(9)
-
-  const appendButton = () => {
-    setNodeValue(randomItem)
-    append(nodeValue)
-  }
-
-  const prependButton = () => {
-    setNodeValue(randomItem)
-    prepend(nodeValue)
-  }
-
-  const insertAfterButton = () => {
-    setNodeValue(randomItem)
-    insertAfter(nodeValue, randomItem)
-  }
-
-  const insertBeforeButton = () => {
-    setNodeValue(randomItem)
-    insertBefore(nodeValue, randomItem)
-  }
-
   const [appendBtn, getAppendBtn] = useState<HTMLElement | null | undefined>(null)
-
-  const buildListOnPageLoad = (delay: number, nodeCount: number, button: HTMLElement) => {
-    for (let i = 0; i < nodeCount; i++) {
-      setTimeout(() => {
-        button.click()
-      }, delay)
-      delay = delay * 1.7
-    }
-  }
+  const [nodeCount, setNodeCount] = useState(0)
 
   useEffect(() => {
-    getAppendBtn(document.getElementById('append'))
-    if (appendBtn) {
+    if (nodeCount < 20) {
+      AnimatedList.setListSize(length)
+      getAppendBtn(document.getElementById('append'))
+      appendBtn?.click()
       setTimeout(() => {
-        buildListOnPageLoad(23, 5, appendBtn)
-      }, 0)
+        setNodeCount(nodeCount + 1)
+      }, nodeCount * 1.7);
     }
-  }, [appendBtn])
+  }, [appendBtn, nodeCount])
+
+  let clicked = useRef(false)
+
+  const clearButton = (length: number) => {
+    if (length > 0) {
+      if (!clicked.current) {
+        clicked.current = true
+        const removeLast = document.querySelector('#removeLast') as HTMLInputElement
+        let len = length
+        const interval = setInterval(() => {
+          removeLast?.click()
+          len -= 1
+          if (len === 0) {
+            clicked.current = false
+            clearInterval(interval)
+          }
+        }, 150)
+      }
+    }
+  }
+
+  selectedNode.current = ''
 
   return (
-    <div className={css['buttonContainer']}>
-      <button className={css['button']} id={'append'} onClick={appendButton}>
-        append({nodeValue})</button>
-      <button className={css['button']} onClick={prependButton}>
-        prepend({nodeValue})</button>
-      <button className={css['button']} onClick={insertBeforeButton}>
-        insertBefore({nodeValue}, {randomItem}) </button>
-      <button className={css['button']} onClick={insertAfterButton}>
-        insertAfter({nodeValue}, {randomItem}) </button>
-      <button className={css['button']} onClick={removeFirst}>
-        removeFirst( )</button>
-      <button className={css['button']} onClick={removeLast}>
-        removeLast( )</button>
-      <button className={css['button']} onClick={() => { removeItem(nodeValue) }}>
-        removeItem({nodeValue})</button>
+    <div className={buttonCSS['buttonContainer']}>
+      <Link to={'/LinkedList/Implementation'} className={buttonCSS['button']}
+      >implementation</Link>
+
+      <button className={buttonCSS['button']} id={'append'}
+        onClick={() => {
+          AnimatedList.animate(append, 'last', 'popUp', randomNumber(9))
+        }} >append( )</button>
+
+      <button className={buttonCSS['button']}
+        onClick={() => {
+          AnimatedList.animate(prepend, 'first', 'popUp', randomNumber(9))
+        }}
+      >prepend( )</button>
+
+      <button className={buttonCSS['button']}
+        onClick={() => {
+          if (selectedNode.current) {
+            AnimatedList.animate(
+              insertBefore, selectedNode.current, 'popUp', randomNumber(9)
+            )
+          }
+        }} >insertBefore( ) </button>
+
+      <button className={buttonCSS['button']}
+        onClick={() => {
+          if (selectedNode.current) {
+            AnimatedList.animate(
+              insertAfter, selectedNode.current, 'popUp', randomNumber(9), true
+            )
+          }
+        }} >insertAfter( ) </button>
+
+      <button className={buttonCSS['button']} onClick={() => {
+        AnimatedList.animate(removeFirst, 'first', 'shrink')
+      }} >removeFirst( )</button>
+
+      <button className={buttonCSS['button']} id={'removeLast'} onClick={() => {
+        AnimatedList.animate(removeLast, 'last', 'shrink')
+      }} >removeLast( )</button>
+
+      <button className={buttonCSS['button']} onClick={() => {
+        if (selectedNode.current) {
+          AnimatedList.animate(removeItem, selectedNode.current, 'shrink')
+        }
+      }} >removeItem( )</button>
+
+      <button className={buttonCSS['button']} id={'clear'}
+        onClick={() => { clearButton(length) }} >clear</button>
     </div>
   )
 }

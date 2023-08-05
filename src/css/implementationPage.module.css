@@ -1,0 +1,115 @@
+.pageContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.article {
+  user-select: text;
+  position: absolute;
+  left: 29rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 74rem;
+  text-align: left;
+  gap: 3rem;
+}
+
+.headline {
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+  width: 50rem;
+  font-size: 2.5rem;
+  color: var(--text);
+  text-align: center;
+  font-weight: bolder;
+  filter: brightness(1.05);
+}
+
+.paragraph {
+  font-size: 2.1rem;
+  color: var(--text);
+  text-align: center;
+  filter: brightness(1.05);
+}
+
+.text {
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 2.7rem;
+  font-weight: 400;
+  text-align: left;
+  filter: brightness(1.05);
+
+}
+
+.backButton {
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+}
+
+.dividingLine {
+  height: 1rem;
+  width: 70%;
+  background-color: rgba(93, 103, 143, 0.368);
+  filter: brightness(1.8);
+  transform: scaley(0.05);
+}
+
+@media only screen and (max-width: 1000px) {
+  .pageContainer {
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .article {
+    gap: 2rem;
+    position: relative;
+    left: initial;
+    width: 75%;
+  }
+
+  .headline {
+    margin-top: initial;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .article {
+    width: 80%;
+  }
+
+  .paragraph {
+    width: 70%;
+  }
+
+  .headline {
+    margin-top: initial;
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .article {
+    width: 90%;
+  }
+
+  .headline {
+    font-size: 2rem;
+  }
+
+  .paragraph {
+    font-size: 1.9rem;
+  }
+
+  .backButton {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+  }
+}

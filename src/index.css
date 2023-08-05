@@ -1,12 +1,18 @@
 :root {
+  --background: rgba(30, 34, 47, 1);
+  --purple: rgba(194, 190, 255, 1);
+  --yellow: rgba(255, 225, 193, 0.88);
+  --red: rgba(255, 195, 212, 0.87);
+  --cyan: rgba(175, 255, 248, 0.86);
+  --text: rgba(184, 206, 234, 1);
+  --backButton: rgba(184, 206, 234, 0.9);
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 62.5%;
   font-weight: 450;
   user-select: none;
-
   color: rgb(231, 239, 255);
   background-color: rgb(30, 34, 47);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,13 +28,16 @@
   box-sizing: inherit;
 }
 
-.app-container {
-  height: 100vh;
-  width: 100vw;
-  gap: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10%;
-  justify-content: flex-start;
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  line-height: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: default;
 }

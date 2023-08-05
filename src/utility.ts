@@ -7,6 +7,9 @@ export const randomKey = (charNumber: number): string => {
   return str
 }
 
-export const randomNumber = (range: number): number => {
-  return Math.floor(Math.random() * range + 1)
+export const randomNumber = (range: number): string => {
+  const randomByte = new Uint32Array(1)
+  window.crypto.getRandomValues(randomByte)
+  const number = (randomByte[0]! / 4294967295) * range
+  return String(Math.round(number))
 }

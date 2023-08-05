@@ -1,0 +1,80 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.title {
+  margin-top: 13rem;
+  margin-bottom: 9rem;
+  font-size: 4.2rem;
+  background-image: linear-gradient(to right, var(--purple), var(--red));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.buttonContainer {
+  padding: 1rem;
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dsaButton {
+  text-decoration: none;
+  font-size: 2rem;
+  cursor: default;
+  color: var(--red);
+}
+
+.hovered {
+  filter: brightness(1.15);
+}
+
+@keyframes underline {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.underline {
+  margin-top: 0.5rem;
+  animation: underline 0.4s;
+  animation-fill-mode: forwards;
+  width: 0%;
+  height: 0.1rem;
+  border-radius: 0.5rem;
+  background-color: var(--red);
+  transform: scaley(1.3);
+}
+
+@keyframes underlineOut {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+.underlineOut {
+  composes: underline;
+  animation: underlineOut 0.2s;
+}
+
+@media only screen and (max-width: 500px) {
+  .title {
+    font-size: 4rem;
+  }
+}

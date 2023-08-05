@@ -1,79 +1,55 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { LinkedListRenderer } from './LinkedListRenderer'
 import { LinkedListControls } from './LinkedListControls'
-import { randomNumber } from '../utility.ts'
+import css from '../css/linkedList.module.css'
+import { BackButton } from '../BackButton/BackButton'
 
 interface Node {
   item: unknown
   next: Node | null
-  new: boolean
 }
 
 const makeNode = (item: unknown, next: Node | null): Node => ({
   item,
   next,
-  new: true
 })
 
 export const LinkedList = () => {
-  const [head, setNode] = useState<Node | null>(null)
+  const head = useRef<Node | null>(null)
   const [length, setLength] = useState(0)
-  const [nodeValue, newNodeValue] = useState<number>(randomNumber(9))
-
-  const resetLabels = () => {
-    if (head) {
-      let node = head
-      node.new = false
-      while (node.next != null) {
-        node = node.next
-        node.new = false
-      }
-    }
-  }
-
-  const setNodeValue = (val: number) => {
-    resetLabels()
-    newNodeValue(val)
-  }
+  const selectedNode = useRef('')
 
   const addFirstNode = (item: unknown) => {
-    setNode(makeNode(item, head))
-    setLength(length + 1)
-  }
-
-  const addNode = (head: Node) => {
-    setNode({ ...head })
+    head.current = makeNode(item, head.current)
     setLength(length + 1)
   }
 
   const append = (item: unknown) => {
-    resetLabels()
-    if (head === null) {
+      if (head.current === null) {
+        addFirstNode(item)
+      } else {
+        let node = head.current
+        while (node.next != null) {
+          node = node.next
+        }
+        node.next = makeNode(item, null)
+        setLength(length + 1)
+      }
+  }
+
+  const prepend = (item: unknown) => {
+    if (head.current === null) {
       addFirstNode(item)
     } else {
-      let node = head
-      while (node.next != null) {
-        node = node.next
-      }
-      node.next = makeNode(item, null)
+      const node = makeNode(item, null)
+      node.next = head.current
+      head.current = node
       setLength(length + 1)
     }
   }
 
-  const prepend = (item: unknown) => {
-    resetLabels()
-    if (head === null) {
-      addFirstNode(item)
-    } else {
-      const node = makeNode(item, null)
-      node.next = head
-      addNode(node)
-    }
-  }
-
-  const insertAfter = (key: unknown, item: unknown) => {
-    resetLabels()
-    let node = head
+  const insertAfter = (key: string, item: unknown) => {
+    let node = head.current
     while ((node != null) && (node.item != key)) { node = node.next }
     if (node != null) {
       node.next = makeNode(item, node.next)
@@ -81,15 +57,14 @@ export const LinkedList = () => {
     }
   }
 
-  const insertBefore = (key: unknown, item: unknown) => {
-    resetLabels()
-    if (head === null) { return }
-    if (head.item === key) {
-      addFirstNode(item)
+  const insertBefore = (key: string, item: unknown) => {
+    if (head.current === null) { return }
+    if (head.current.item == key) {
+      prepend(item)
       return
     }
     let previous: Node | null = null
-    let node: Node | null = head
+    let node: Node | null = head.current
     while ((node != null) && (node.item != key)) {
       previous = node
       node = node.next
@@ -101,21 +76,19 @@ export const LinkedList = () => {
   }
 
   const removeFirst = () => {
-    if (head) {
-      resetLabels()
-      setNode(head.next)
+    if (head.current) {
+      head.current = head.current.next
       setLength(length - 1)
     }
   }
 
   const removeLast = () => {
-    if (head) {
-      resetLabels()
-      if (!head.next) {
+    if (head.current) {
+      if (!head.current.next) {
         removeFirst()
         return
       }
-      let node = head
+      let node = head.current
       while (node.next != null) {
         if (!node.next.next) {
           node.next = null
@@ -128,40 +101,42 @@ export const LinkedList = () => {
   }
 
   const removeItem = (key: unknown) => {
-    if (!head) {
-      return
-    }
-    let targetNode = head
-    let nextNode = targetNode.next
-    while (nextNode !== null && nextNode.item !== key) {
-      targetNode = nextNode
-      nextNode = nextNode.next
-    }
-    if (nextNode === null) {
-      removeFirst()
-    } else {
-      targetNode.next = nextNode.next
-      resetLabels()
-      setLength(length - 1)
+    if (head.current) {
+      let targetNode = head.current
+      let nextNode = targetNode.next
+      while (nextNode !== null && nextNode.item != key) {
+        targetNode = nextNode
+        nextNode = nextNode.next
+      }
+      if (head.current.item == key) {
+        removeFirst()
+      } else if (nextNode) {
+        if (nextNode.item == key) {
+          targetNode.next = nextNode.next
+          setLength(length - 1)
+        }
+      }
     }
   }
 
   return (
-    <>
+    <main className={css['container']}>
+      <BackButton link={'/'} className={css['backButton']}/>
+      <h1 className={css['title']} >Linked List</h1>
       <LinkedListControls
         append={append}
         insertAfter={insertAfter}
-        nodeValue={nodeValue}
+        selectedNode={selectedNode}
         insertBefore={insertBefore}
         removeFirst={removeFirst}
         removeLast={removeLast}
-        setNodeValue={setNodeValue}
         prepend={prepend}
-        removeItem={removeItem} />
+        removeItem={removeItem} 
+        length={length} />
       <LinkedListRenderer
-        linkedList={head}
+        linkedList={head.current}
         length={length}
-        setNodeValue={setNodeValue} />
-    </>
+        selectedNode={selectedNode} />
+    </main>
   )
 }
