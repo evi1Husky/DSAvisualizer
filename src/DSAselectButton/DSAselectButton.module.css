@@ -1,0 +1,60 @@
+.buttonContainer {
+  padding: 1rem;
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dsaButton {
+  text-decoration: none;
+  font-size: 2rem;
+  cursor: default;
+  color: var(--white);
+}
+
+.hovered {
+  filter: brightness(1.1);
+}
+
+@keyframes underline {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.underline {
+  margin-top: 0.5rem;
+  margin-bottom: -0.6rem;
+  animation: underline 0.4s;
+  animation-fill-mode: forwards;
+  width: 0%;
+  height: 0.1rem;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+}
+
+@keyframes underlineOut {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+.underlineOut {
+  composes: underline;
+  animation: underlineOut 0.2s;
+}
+
+@media only screen and (max-width: 500px) {
+  .dsaButton {
+    font-size: 1.5rem;
+  }
+}

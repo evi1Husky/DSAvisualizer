@@ -9,10 +9,11 @@
 }
 
 .title {
+  cursor: default;
   margin-top: 6rem;
   margin-bottom: 0.5rem;
   font-size: 3.6rem;
-  background-image: linear-gradient(to right, var(--cyan), var(--purple));
+  background-image: var(--titleGradient);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -29,6 +30,7 @@
 }
 
 .node {
+  cursor: default;
   flex: 1;
   margin: 1rem 1rem;
   display: flex;

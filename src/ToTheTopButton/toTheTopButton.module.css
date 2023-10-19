@@ -1,0 +1,38 @@
+.toTheTopButton {
+  cursor: default;
+  font-size: 3rem;
+  color: var(--white);
+  transform: rotate(90deg);
+  display: none;
+  animation: fadeIn 0.5s linear;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.toTheTopButton:hover {
+  filter: brightness(1.12);
+}
+
+.toTheTopButton:active {
+  filter: brightness(0.8);
+  transform: scale(0.99) rotate(90deg);
+}
+
+@media only screen and (max-width: 500px) {
+  .toTheTopButton {
+    transform: rotate(90deg) scale(0.8);
+    margin-right: 0.2rem;
+  }
+
+  .toTheTopButton:active {
+    transform: scale(0.75) rotate(90deg);
+  }
+}

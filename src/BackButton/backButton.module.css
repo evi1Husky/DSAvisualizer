@@ -1,8 +1,9 @@
 .backButton {
   cursor: default;
   font-size: 3rem;
-  color: var(--backButton);
+  color: var(--white);
   text-decoration: none;
+  margin-right: 0.3rem;
 }
 
 .backButton:hover {
@@ -14,8 +15,14 @@
   transform: scale(0.99);
 }
 
+@media only screen and (max-width: 600px) {
+  .backButton {
+    margin-right: 1.5rem;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .backButton {
-    transform: scale(0.7);
+    transform: scale(0.8);
   }
 }

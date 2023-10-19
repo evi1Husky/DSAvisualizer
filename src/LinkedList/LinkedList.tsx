@@ -1,8 +1,9 @@
-import { useState, useRef } from "react"
+import { useState, useRef } from 'react'
 import { LinkedListRenderer } from './LinkedListRenderer'
 import { LinkedListControls } from './LinkedListControls'
-import css from '../css/linkedList.module.css'
+import css from './linkedList.module.css'
 import { BackButton } from '../BackButton/BackButton'
+import { ImplementationButton } from '../ImplementationButton/ImplementationButton'
 
 interface Node {
   item: unknown
@@ -25,16 +26,16 @@ export const LinkedList = () => {
   }
 
   const append = (item: unknown) => {
-      if (head.current === null) {
-        addFirstNode(item)
-      } else {
-        let node = head.current
-        while (node.next != null) {
-          node = node.next
-        }
-        node.next = makeNode(item, null)
-        setLength(length + 1)
+    if (head.current === null) {
+      addFirstNode(item)
+    } else {
+      let node = head.current
+      while (node.next != null) {
+        node = node.next
       }
+      node.next = makeNode(item, null)
+      setLength(length + 1)
+    }
   }
 
   const prepend = (item: unknown) => {
@@ -121,7 +122,8 @@ export const LinkedList = () => {
 
   return (
     <main className={css['container']}>
-      <BackButton link={'/'} className={css['backButton']}/>
+      <BackButton link={'/'} className={css['backButton']} />
+      <ImplementationButton link={'/LinkedList/Implementation'}/>
       <h1 className={css['title']} >Linked List</h1>
       <LinkedListControls
         append={append}
@@ -131,7 +133,7 @@ export const LinkedList = () => {
         removeFirst={removeFirst}
         removeLast={removeLast}
         prepend={prepend}
-        removeItem={removeItem} 
+        removeItem={removeItem}
         length={length} />
       <LinkedListRenderer
         linkedList={head.current}

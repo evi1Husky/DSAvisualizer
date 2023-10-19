@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     path: "/LinkedList/Implementation",
     element: <ImplementationLinkedList />,
   }
-])
+], { basename: "/" })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

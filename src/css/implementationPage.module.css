@@ -20,24 +20,55 @@
 
 .headline {
   margin-top: 7rem;
-  margin-bottom: 2rem;
-  width: 50rem;
+  margin-bottom: 2.5rem;
   font-size: 2.5rem;
-  color: var(--text);
-  text-align: center;
+  color: var(--white);
   font-weight: bolder;
   filter: brightness(1.05);
+  white-space: nowrap;
+  outline: none;
+}
+
+.headline:hover {
+  text-decoration: underline;
+  filter: brightness(115%);
+}
+
+.headline::before {
+  content: "#";
+  opacity: 0;
+
+}
+
+.headline:hover::before {
+  opacity: 1;
 }
 
 .paragraph {
   font-size: 2.1rem;
-  color: var(--text);
+  color: var(--white);
   text-align: center;
   filter: brightness(1.05);
+  white-space: nowrap;
+  outline: none;
+}
+
+.paragraph:hover {
+  text-decoration: underline;
+  filter: brightness(115%);
+}
+
+.paragraph::before {
+  content: "#";
+  opacity: 0;
+}
+
+.paragraph:hover::before {
+  opacity: 1;
 }
 
 .text {
-  color: var(--text);
+  color: var(--white);
   font-size: 1.6rem;
   line-height: 2.7rem;
   font-weight: 400;
@@ -46,7 +77,9 @@
 
 }
 
-.backButton {
+.navigationButtons {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   bottom: 10%;
   right: 5%;
@@ -58,6 +91,10 @@
   background-color: rgba(93, 103, 143, 0.368);
   filter: brightness(1.8);
   transform: scaley(0.05);
+}
+
+.emptySpace {
+  height: 1rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -78,6 +115,18 @@
     margin-top: initial;
   }
 }
+
+.articleLink {
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+  width: 50rem;
+  font-size: 2rem;
+  color: var(--white);
+  text-align: center;
+  font-weight: bold;
+  filter: brightness(1.05);
+}
+
 
 @media only screen and (max-width: 700px) {
   .article {
@@ -103,13 +152,11 @@
     font-size: 2rem;
   }
 
-  .paragraph {
-    font-size: 1.9rem;
+  .hash {
+    font-size: 2rem;
   }
 
-  .backButton {
-    position: fixed;
-    bottom: 2%;
-    right: 2%;
+  .paragraph {
+    font-size: 1.9rem;
   }
 }

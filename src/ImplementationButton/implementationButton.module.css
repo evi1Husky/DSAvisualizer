@@ -1,0 +1,72 @@
+.implementationButton {
+  text-decoration: none;
+  font-size: 1.8rem;
+  cursor: default;
+  color: var(--white);
+}
+
+.hovered {
+  filter: brightness(1.1);
+}
+
+#implementationButtonContainer {
+  position: fixed;
+  bottom: 10.7%;
+}
+
+.implementationButtonContainer {
+  width: 14rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.implementationButton:hover {
+  filter: brightness(110%);
+}
+
+.implementationButton:active {
+  filter: brightness(95%);
+}
+
+@keyframes underline {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.underline {
+  margin-top: 0.5rem;
+  margin-bottom: -0.6rem;
+  animation: underline 0.4s;
+  animation-fill-mode: forwards;
+  width: 0%;
+  height: 0.1rem;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+}
+
+.underlineOut {
+  composes: underline;
+  animation: underlineOut 0.2s;
+}
+
+@keyframes underlineOut {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .implementationButton {
+    font-size: 1.5rem;
+  }
+}

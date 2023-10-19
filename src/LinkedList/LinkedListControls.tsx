@@ -1,8 +1,7 @@
-import buttonCSS from '../css/buttons.module.css'
+import buttonCSS from './buttons.module.css'
 import AnimatedList from '../listAnimation/AnimatedList.tsx'
 import { useEffect, useState, useRef } from 'react'
 import { randomNumber } from '../utility.ts'
-import { Link } from 'react-router-dom'
 
 AnimatedList.setListContainerID('listContainer')
 
@@ -67,8 +66,6 @@ export const LinkedListControls: React.FC<LinkedListControlsProps> = ({
 
   return (
     <div className={buttonCSS['buttonContainer']}>
-      <Link to={'/LinkedList/Implementation'} className={buttonCSS['button']}
-      >implementation</Link>
 
       <button className={buttonCSS['button']} id={'append'}
         onClick={() => {

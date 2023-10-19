@@ -1,4 +1,4 @@
-import css from '../css/linkedList.module.css'
+import css from './linkedList.module.css'
 
 interface LinkedListNodeProps {
   node: NodeToRender

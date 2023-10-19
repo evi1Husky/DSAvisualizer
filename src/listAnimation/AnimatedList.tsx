@@ -6,20 +6,20 @@ const AnimatedList = (() => {
       { transform: 'scale(1.3)', offset: 0.5 },
       { transform: 'scale(1)', offset: 1 },
     ],
-    popUpOptions: { duration: 100, iterations: 1, delay: 0, },
+    popUpOptions: { duration: 110, iterations: 1, delay: 0, },
     shrink: [
       { transform: 'scale(1)', offset: 0 },
       { transform: 'scale(1.3)', offset: 0.15 },
       { transform: 'scale(1)', offset: 0.25 },
       { transform: 'scale(0)', offset: 1 },
     ],
-    shrinkOptions: { duration: 100, iterations: 1, delay: 0, },
+    shrinkOptions: { duration: 110, iterations: 1, delay: 0, },
     traverse: [
       { transform: 'scale(1)', filter: 'brightness(1.17)', offset: 0, },
       { transform: 'scale(1.15)', offset: 0.15 },
       { transform: 'scale(1)', filter: 'brightness(1)', offset: 1, },
     ],
-    traverseOptions: { duration: 100, iterations: 1, delay: 0, },
+    traverseOptions: { duration: 110, iterations: 1, delay: 0, },
   }
 
   const setAnimation = (animationType: string, animationValue: any) => {
@@ -135,7 +135,7 @@ const AnimatedList = (() => {
   }
 
   /* 
-   this variable is needed for camparing the list sizes at different states 
+   this variable is needed for camparing list sizes at different states 
    to prevent animations from being applied before the list has updated 
    */
   let listSize = 0
