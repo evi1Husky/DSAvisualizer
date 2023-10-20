@@ -13,6 +13,10 @@
   color: var(--white);
 }
 
+.dsaButton:active {
+  filter: brightness(88%);
+}
+
 .hovered {
   filter: brightness(1.1);
 }

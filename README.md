@@ -1,8 +1,7 @@
 # Data structure visualisation app (work in progress)
 
 This web app is a DSA learning tool, allowing to visualise the process of creating and
-manipulating data structures such as linked lists and binary trees in a comprehensive
-way using descriptive animations and detailed models.
+manipulating data structures such as linked lists and binary search trees in a comprehensive way using descriptive animations and detailed models.
 
 # Features
 

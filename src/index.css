@@ -1,10 +1,15 @@
 :root {
   --background: rgb(26, 31, 46);
-  --purple: rgb(191, 193, 255);
-  --white: rgba(187, 201, 230, 1);
+  --purple: rgb(167, 169, 224);
+  --lightPurple: rgb(198, 200, 255);
+  --darkPurple: rgb(31, 33, 53);
+  --saturatedPurple: rgb(160, 164, 255);
+  --white: rgb(187, 201, 230);
   --linkHighLight: var(--purple);
-  --linkHighLightText: rgb(0, 0, 0);
-  --titleGradient: linear-gradient(to right, var(--white), var(--purple));
+  --linkHighLightText: var(--darkPurple);
+  --titleGradient: linear-gradient(to right, var(--white), var(--saturatedPurple));
+  --functionButton: var(--purple);
+  --functionButtonText: var(--darkPurple);
 
   scroll-behavior: smooth;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
