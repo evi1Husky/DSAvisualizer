@@ -18,10 +18,25 @@
   gap: 3rem;
 }
 
+.code {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.articleImage {
+  width: 660px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.linkedListNodeImage {
+  width: 300px;
+}
+
 .headline {
-  margin-top: 7rem;
+  margin-top: 10rem;
   margin-bottom: 2.5rem;
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   color: var(--white);
   font-weight: bolder;
   filter: brightness(1.05);
@@ -31,13 +46,12 @@
 
 .headline:hover {
   text-decoration: underline;
-  filter: brightness(115%);
+  filter: brightness(110%);
 }
 
 .headline::before {
   content: "#";
   opacity: 0;
-
 }
 
 .headline:hover::before {
@@ -45,7 +59,7 @@
 }
 
 .paragraph {
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   color: var(--white);
   text-align: center;
   filter: brightness(1.05);
@@ -55,7 +69,7 @@
 
 .paragraph:hover {
   text-decoration: underline;
-  filter: brightness(115%);
+  filter: brightness(110%);
 }
 
 .paragraph::before {
@@ -74,7 +88,6 @@
   font-weight: 400;
   text-align: left;
   filter: brightness(1.05);
-
 }
 
 .navigationButtons {
@@ -127,6 +140,11 @@
   filter: brightness(1.05);
 }
 
+@media only screen and (max-width: 1000px) {
+  .headline {
+    margin-top: 3rem;
+  }
+}
 
 @media only screen and (max-width: 700px) {
   .article {
@@ -137,13 +155,17 @@
     width: 70%;
   }
 
-  .headline {
-    margin-top: initial;
-    width: 70%;
+  .articleImage {
+    width: 500px;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
   }
 }
 
 @media only screen and (max-width: 600px) {
+  .code {
+    font-size: 1.5rem;
+  }
   .article {
     width: 90%;
   }
@@ -158,5 +180,26 @@
 
   .paragraph {
     font-size: 1.9rem;
+  }
+
+  .articleImage {
+    width: 430px;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .code {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .articleImage {
+    width: 350px;
+  }
+  .code {
+    font-size: 1.1rem;
   }
 }

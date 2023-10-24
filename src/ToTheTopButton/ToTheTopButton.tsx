@@ -17,9 +17,9 @@ export const ToTheTopButton: React.FC<ToTheTopButtonProps> = ({
   const toTheTopButton = useRef<HTMLAnchorElement | null>();
 
   /*
-      Use Intersection Observer to make toTheTopButton appear when
-      scrolling past headline
-    */
+    Use Intersection Observer to make toTheTopButton appear when
+    scrolling past headline
+  */
 
   const observerCallback = useCallback(
     (entries: IntersectionObserverEntry[]) => {

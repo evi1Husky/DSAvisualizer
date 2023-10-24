@@ -6,7 +6,7 @@
 }
 
 .hovered {
-  filter: brightness(1.1);
+  filter: brightness(1.07);
 }
 
 #implementationButtonContainer {
@@ -22,7 +22,7 @@
 }
 
 .implementationButton:hover {
-  filter: brightness(110%);
+  filter: brightness(1.07);
 }
 
 .implementationButton:active {

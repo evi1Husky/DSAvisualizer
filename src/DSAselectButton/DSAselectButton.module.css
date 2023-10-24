@@ -18,7 +18,7 @@
 }
 
 .hovered {
-  filter: brightness(1.1);
+  filter: brightness(1.07);
 }
 
 @keyframes underline {

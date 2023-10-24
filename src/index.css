@@ -1,13 +1,17 @@
 :root {
   --background: rgb(26, 31, 46);
-  --purple: rgb(167, 169, 224);
-  --lightPurple: rgb(198, 200, 255);
+  --purple: rgb(159, 173, 236);
+  --lightPurple: rgb(177, 189, 240);
   --darkPurple: rgb(31, 33, 53);
-  --saturatedPurple: rgb(160, 164, 255);
-  --white: rgb(187, 201, 230);
+  --saturatedPurple: rgb(134, 152, 234);
+  --white: rgb(193, 202, 244);
   --linkHighLight: var(--purple);
   --linkHighLightText: var(--darkPurple);
-  --titleGradient: linear-gradient(to right, var(--white), var(--saturatedPurple));
+  --titleGradient: linear-gradient(
+    to right,
+    var(--white),
+    var(--saturatedPurple)
+  );
   --functionButton: var(--purple);
   --functionButtonText: var(--darkPurple);
 
